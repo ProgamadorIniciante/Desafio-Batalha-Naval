@@ -1,62 +1,40 @@
-
 #include <stdio.h>
 
-#define linhas 10
-#define colunas 10 
-#define navio 3
+#define TAM_LINHAS 10
+#define TAM_COLUNAS 10 
+#define TAM_NAVIO 3
 
 int main() {
-    int matriz[linhas][colunas] = {0}; // Inicializa todos os elementos com 0.
-    int diagonalE = 0;
-    int diagonalD = 9;
-    printf("Tabuleiro: Batalha Naval \n");
-    
-    // loop para o navio ocupar 3 posições horizontais.
-    for (int i = 0; i < navio; i++) {
-        for (int j = 0; j < navio; j++)
-        {
-            matriz[i + 4][1] = navio;
-        }
+    int tabuleiro[TAM_LINHAS][TAM_COLUNAS] = {0}; // Tabuleiro zerado
+    printf("Mapa: Jogo Batalha Naval\n\n");
+
+    // Navio horizontal na linha 2 (índice 1), colunas 3 a 5
+    for (int i = 0; i < TAM_NAVIO; i++) {
+        tabuleiro[1][2 + i] = TAM_NAVIO;
     }
 
-    // loop para o navio ocupar 3 posições vertical.
-    for (int i = 0; i < navio; i++) {
-        for (int j = 0; j < navio; j++)
-        {
-            matriz[4][7 + j] = navio;
-        }
+    // Navio vertical na coluna 8 (índice 7), linhas 5 a 7
+    for (int i = 0; i < TAM_NAVIO; i++) {
+        tabuleiro[4 + i][7] = TAM_NAVIO;
     }
 
-    // loop para o navio na diagonal esquerda.
-    for (int i = 0; i < navio; i++)
-    {
-        for (int j = 0; j < navio; j++)
-        {
-            matriz[diagonalE][diagonalE] = navio;  
-        }
-        diagonalE++;
+    // Navio na diagonal esquerda: posições (1,1), (2,2), (3,3)
+    for (int i = 0; i < TAM_NAVIO; i++) {
+        tabuleiro[1 + i][1 + i] = TAM_NAVIO;
     }
 
-    // loop para o navio na diagonal direita.
-    for (int i = 0; i < navio; i++)
-    {
-        for (int j = 0; j < navio; j++)
-        {
-            matriz[diagonalD][diagonalD] = navio;  
-        }
-        diagonalD--;
+    // Navio na diagonal direita: posições (2,7), (3,6), (4,5)
+    for (int i = 0; i < TAM_NAVIO; i++) {
+        tabuleiro[2 + i][7 - i] = TAM_NAVIO;
     }
 
-    // Mostrar o tabuleiro no painel.
-    for (int i = 0; i < linhas; i++) 
-    {
-        for (int j = 0; j < colunas; j++)
-        {
-            printf("%d ", matriz[i][j]);
+    // Exibir o tabuleiro
+    for (int l = 0; l < TAM_LINHAS; l++) {
+        for (int c = 0; c < TAM_COLUNAS; c++) {
+            printf("%d ", tabuleiro[l][c]);
         }
         printf("\n");
     }
 
     return 0;
 }
-
